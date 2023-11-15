@@ -1,5 +1,5 @@
 import random
-from colorama import Fore
+from colorama import Fore, Back
 
 def is_valid_move(board, row, col, num):
 
