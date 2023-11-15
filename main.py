@@ -1,5 +1,6 @@
-import random
+
 from colorama import Fore, Back
+import generate_board
 
 def is_valid_move(board, row, col, num):
 
@@ -34,29 +35,17 @@ def solve_board(board):
                 return False
     return True
 
-def generate_board():
-    board = [[0] * 9 for _ in range(9)]
-    solve_board(board)
-
-    for _ in range(20):
-        row, col = random.randint(0, 8), random.randint(0, 8)
-        while board[row][col] == 0:
-            row, col = random.randint(0, 8), random.randint(0, 8)
-        board[row][col] = 0
-
-    return board
-
 def print_board(board):
     for i in range(9):
         if i % 3 == 0 and i != 0:
-            print("- - - - - - - - - - - - - - -")
+            print( f"{Fore.RED}- - - - - - - - - - - - - - -")
         for j in range(9):
             if j % 3 == 0 and j != 0:
-                print("|", end=" ")
+                print(f"{Fore.RED}|", end=" ")
             if j == 8:
                 print(board[i][j])
             else:
-                print(str(board[i][j]) + " ", end=" ")
+                print(f"{Fore.WHITE} {str(board[i][j])}", end=" ")
 
 def is_valid_move(board, row, col, num):
 
@@ -92,7 +81,7 @@ def solve_board(board):
     return True
 
 def main():
-    sudoku_board = generate_board()
+    sudoku_board = generate_board.generate_board()
 
     while not is_board_full(sudoku_board):
         print_board(sudoku_board)
