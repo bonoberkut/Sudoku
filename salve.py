@@ -5,7 +5,7 @@ def solve_board(board):
         for col in range(9):
             if board[row][col] == 0:
                 for num in range(1, 10):
-                    if main.is_valid_move(board, row, col, num):
+                    if main.successfulMove(board, row, col, num):
                         board[row][col] = num
                         if solve_board(board):
                             return True

@@ -2,7 +2,7 @@
 from colorama import Fore, Back
 import generate_board
 
-def is_valid_move(board, row, col, num):
+def successfulMove(board, row, col, num):
     for i in range(9):
         if board[row][i] == num or board[i][col] == num:
             return False
@@ -15,7 +15,7 @@ def is_valid_move(board, row, col, num):
 
     return True
 
-def is_board_full(board):
+def boardFull(board):
     for row in board:
         if 0 in row:
             return False
@@ -26,7 +26,7 @@ def solve_board(board):
         for col in range(9):
             if board[row][col] == 0:
                 for num in range(1, 10):
-                    if is_valid_move(board, row, col, num):
+                    if successfulMove(board, row, col, num):
                         board[row][col] = num
                         if solve_board(board):
                             return True
@@ -46,8 +46,7 @@ def print_board(board):
             else:
                 print(f"{Fore.WHITE} {str(board[i][j])}", end=" ")
 
-def is_valid_move(board, row, col, num):
-
+def successfulMove(board, row, col, num):
     for i in range(9):
         if board[row][i] == num or board[i][col] == num:
             return False
@@ -60,7 +59,7 @@ def is_valid_move(board, row, col, num):
 
     return True
 
-def is_board_full(board):
+def boardFull(board):
     for row in board:
         if 0 in row:
             return False
@@ -70,7 +69,7 @@ def is_board_full(board):
 def main():
     sudoku_board = generate_board.generate_board()
 
-    while not is_board_full(sudoku_board):
+    while not boardFull(sudoku_board):
         print_board(sudoku_board)
 
         try:
@@ -82,14 +81,14 @@ def main():
             continue
 
         if 0 <= row < 9 and 0 <= col < 9 and 1 <= num <= 9:
-            if is_valid_move(sudoku_board, row, col, num):
+            if successfulMove(sudoku_board, row, col, num):
                 sudoku_board[row][col] = num
             else:
                 print(Fore.RED + "Ошибка! Вы впсиали неверные числа.")
         else:
             print(Fore.RED + "Ошибка! Вы не правильно ввели координаты.")
 
-    print(Fore.YELLOW + "Поздравляем! Вы решили SUDOKO!")
+    print(Fore.YELLOW + "Поздравляем! Вы решили SUDOKU!")
     print_board(sudoku_board)
 
 
