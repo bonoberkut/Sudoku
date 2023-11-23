@@ -1,4 +1,3 @@
-
 from colorama import Fore, Back
 import generate_board
 
@@ -67,7 +66,15 @@ def boardFull(board):
 
 
 def main():
-    sudoku_board = generate_board.generate_board()
+    complexityChange = input("Выберите сложность игры(легкая/средняя/джиган): ")
+    if complexityChange == "легкая":
+        complexityNumber = 20
+    if complexityChange == "средняя":
+        complexityNumber = 35
+    if complexityChange == "джиган":
+        complexityNumber = 50
+
+    sudoku_board = generate_board.generate_board(complexityNumber)
 
     while not boardFull(sudoku_board):
         print_board(sudoku_board)
@@ -91,6 +98,6 @@ def main():
     print(Fore.YELLOW + "Поздравляем! Вы решили SUDOKU!")
     print_board(sudoku_board)
 
-
+#Точка входа
 if __name__ == "__main__":
     main()
